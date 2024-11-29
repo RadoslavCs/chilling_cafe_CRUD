@@ -1,0 +1,45 @@
+{
+    "header": [
+        "&nbsp;",
+        "Hot",
+        "Iced",
+        "Blended"
+    ],
+    "rows": {
+        "Americano": {
+            "Hot": "$10",
+            "Iced": "$15",
+            "Blended": "-"
+        },
+        "Cappuccino": {
+            "Hot": "$15",
+            "Iced": "$18",
+            "Blended": "$20"
+        },
+        "Fresh Latte": {
+            "Hot": "$10",
+            "Iced": "$18",
+            "Blended": "$20"
+        },
+        "Mocha": {
+            "Hot": "$15",
+            "Iced": "$18",
+            "Blended": "$20"
+        },
+        "Espresso": {
+            "Hot": "$10",
+            "Iced": "$15",
+            "Blended": "-"
+        },
+        "Black Coffee": {
+            "Hot": "$15",
+            "Iced": "-",
+            "Blended": "-"
+        },
+        "Double Shot Espresso": {
+            "Hot": "$20",
+            "Iced": "$20",
+            "Blended": "-"
+        }
+    }
+}
