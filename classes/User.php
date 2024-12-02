@@ -13,7 +13,7 @@ class User extends Database
 
     public function __construct(){
         parent::__construct(); // Zavolá konštruktor triedy Database
-        $this->rola = "user";
+        $this->rola = "admin";
         $this->connection = $this->getConnection();
     }
 
@@ -75,32 +75,25 @@ class User extends Database
         }
         // Spustenie session a uloženie informácií o používateľovi
         session_start();
-        $_SESSION['user_id'] = $user['ID'];
+        $_SESSION['user_id'] = $user['id'];
         $_SESSION['login'] = $user['login'];
         $_SESSION['rola'] = $user['rola'];
     }
 
-    public function Logout () {
+    public function logout () {
         session_start();
         session_unset(); // Vymazanie všetkých session premenných
         session_destroy();
-        header( header: 'Location: http://localhost/index.php');
+        header( header: 'Location: index.php');
         exit();
     }
 
-    public function isAdmin(){
-        session_start();
-        if (isset($_SESSION['rola' ]) && $_SESSION['user_id' ]) {
-            if($_SESSION['rola'] == 'admin'){
-            echo "admin je tu";
-            return true;
-            }else{
-                echo "session sa spustil, ale nie je admin";        
-            }
-        }else{
-            echo "nenašiel sa session";
-            return false;
-        }
+    // Kontrola, či je používateľ prihlásený a má rolu admin
+    public function isAdmin(){       
+       if (isset($_SESSION['rola']) && $_SESSION['rola'] === 'admin') {
+        return true;
+    }
+    return false;
     }
 }
 

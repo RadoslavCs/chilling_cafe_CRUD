@@ -16,9 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = new User();
         $user->login($email, $password);
 
-        // Ak prihlásenie prebehlo úspešne, presmerujeme používateľa na stránku
-        header("Location: CRUD.php"); // Alebo nejakú inú stránku pre prihlásených používateľov
-        exit();
+        // Ak prihlásenie prebehlo úspešne a používateľ je admin, presmerujeme používateľa na stránku
+        if($user->isAdmin()){            
+            header("Location: CRUD.php"); 
+            exit();
+        }      
 
     } catch (\Exception $e) {
         // Zachytíme chybu a zobrazíme správu

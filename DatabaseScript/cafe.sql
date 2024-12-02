@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: 127.0.0.1
--- Čas generovania: Pi 29.Nov 2024, 18:55
+-- Čas generovania: Po 02.Dec 2024, 21:54
 -- Verzia serveru: 10.4.32-MariaDB
 -- Verzia PHP: 8.2.12
 
@@ -53,11 +53,11 @@ INSERT INTO `menu_table` (`id`, `name`, `drink_type`, `hot_price`, `iced_price`,
 (13, 'Hong Kong Tea', 'Tea', '8', '12', '4', '-'),
 (14, 'Taiwan Tea', 'Tea', '4', '10', '4', '-'),
 (15, 'Bubble Tea', 'Tea', '8', '12', '-', '-'),
-(16, 'Mixed Fruit Tea', 'Tea', '10', '16', '8', '-'),
+(16, 'Mixed Fruit Tea', 'Tea', '12.50', '16', '8', '-'),
 (18, 'Original Tea', 'Tea', '12', '14', '3', '-'),
 (20, 'Black Tea', 'Tea', '5,54', '12', '-', '-'),
 (23, 'Test Tea', 'Tea', '12', '12', '4', '-'),
-(24, 'Test Coffe', 'Coffee', '15', '23', '-', '20');
+(24, 'Test Coffe', 'Coffee', '2', '23.40', '-', '20');
 
 -- --------------------------------------------------------
 
@@ -78,9 +78,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `login`, `email`, `heslo`, `rola`) VALUES
-(1, 'Rado', '1980radoslavtoth@gmail.com', '$2y$10$I8R0URGv4nkDhLRQ57rOCeenvdo.IntkvZ/GCUdEcVhyb1dkobxPi', 'user'),
-(2, 'Tester', 'radoslav.toth.service@gmail.com', '$2y$10$Sn75SOLjBkXXmSRWW/FGfep0brA5S/rS4mgKEA8ZOfgJWpaPxPrXe', 'user'),
-(3, 'megapixel', 'radoslav.toth@student.ukf.sk', '$2y$10$qEkjXykEJ5FFWEpBeYDzbeqSJMFatr2Evll7gV1837dI4oYicgMjy', 'user');
+(1, 'Rado', '1980radoslavtoth@gmail.com', '$2y$10$I8R0URGv4nkDhLRQ57rOCeenvdo.IntkvZ/GCUdEcVhyb1dkobxPi', 'admin'),
+(2, 'Tester', 'radoslav.toth.service@gmail.com', '$2y$10$Sn75SOLjBkXXmSRWW/FGfep0brA5S/rS4mgKEA8ZOfgJWpaPxPrXe', 'admin'),
+(3, 'megapixel', 'radoslav.toth@student.ukf.sk', '$2y$10$qEkjXykEJ5FFWEpBeYDzbeqSJMFatr2Evll7gV1837dI4oYicgMjy', 'admin'),
+(4, 'Tester1', 'e.novak@gmail.com', '$2y$10$4.0VudGtObbsM7RiQsXCTuhjZmQofKyH58pTx074vNv5ZZXHSE20G', 'admin');
 
 --
 -- Kľúče pre exportované tabuľky
@@ -112,7 +113,7 @@ ALTER TABLE `menu_table`
 -- AUTO_INCREMENT pre tabuľku `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
