@@ -275,4 +275,103 @@ class Table
         }
         
     }
+
+    //Načíta dáta pre kávu a  čaj z JSON súborov a uloží ich
+    public function insertDataFromBothJsonFiles()
+    {
+        // Názvy súborov pre kávu a čaj
+        $coffeeFile = "table.json";
+        $teaFile = "tableTea.json";
+    
+        // Načítanie dát z oboch JSON súborov
+        $coffeeData = $this->loadJsonData($coffeeFile);
+        $teaData = $this->loadJsonData($teaFile);
+    
+        // Pridanie stĺpca 'drink_type' pre kávu a čaj
+        foreach ($coffeeData['rows'] as $name => $details) {
+            $coffeeData['rows'][$name]['drink_type'] = 'Coffee'; // Pre kávu
+        }
+    
+        foreach ($teaData['rows'] as $name => $details) {
+            $teaData['rows'][$name]['drink_type'] = 'Tea'; // Pre čaj
+        }
+    
+        // Spojenie dát a odstránenie duplicít podľa názvu nápoja
+        $allData = array_merge($coffeeData['rows'], $teaData['rows']);
+        $uniqueData = [];
+    
+        foreach ($allData as $name => $details) {
+            if (!isset($uniqueData[$name])) {
+                $uniqueData[$name] = $details;
+            }
+        }
+    
+        // Kombinované dáta bez duplicít
+        $jsonData = [
+            'rows' => $uniqueData,
+        ];
+    
+        // Validácia obsahu JSON
+        if (!isset($jsonData['rows']) || empty($jsonData['rows'])) {
+            echo "Dáta v JSON sú neplatné alebo prázdne.";
+            return;
+        }
+    
+        // Príprava SQL na vloženie dát
+        $sql = "INSERT INTO menu_table (id, name, drink_type, hot_price, iced_price, addon_price, blended_price) 
+                VALUES (:id, :name, :drink_type, :hot_price, :iced_price, :addon_price, :blended_price)
+                ON DUPLICATE KEY UPDATE 
+                hot_price = VALUES(hot_price), iced_price = VALUES(iced_price), 
+                addon_price = VALUES(addon_price), blended_price = VALUES(blended_price)";
+    
+        // Použitie metódy prepareQuery
+        $stmt = $this->db->prepareQuery($sql);
+    
+        $id = 1; // Počiatočný ID (manuálne inkrementovanie)
+    
+        // Iterácia cez skombinované dáta a vloženie
+        foreach ($jsonData['rows'] as $name => $details) {
+            // Príprava dát pre každý riadok
+            $hotPrice = isset($details['Hot']) && $details['Hot'] !== '-' ? ltrim($details['Hot'], '$') : '-';
+            $icedPrice = isset($details['Iced']) && $details['Iced'] !== '-' ? ltrim($details['Iced'], '$') : '-';
+            $addonPrice = isset($details['Addon']) && $details['Addon'] !== '-' ? ltrim($details['Addon'], '$') : '-';
+            $blendedPrice = isset($details['Blended']) && $details['Blended'] !== '-' ? ltrim($details['Blended'], '$') : '-';
+    
+            // Určenie drink_type - už je nastavené
+            $drinkType = $details['drink_type'];  // Už je nastavené na Coffee alebo Tea
+    
+            // Vykonanie SQL s nahradenými parametrami
+            $stmt->execute([
+                ':id' => $id++,
+                ':name' => $name,
+                ':drink_type' => $drinkType,
+                ':hot_price' => $hotPrice,
+                ':iced_price' => $icedPrice,
+                ':addon_price' => $addonPrice,
+                ':blended_price' => $blendedPrice
+            ]);
+        }
+    
+        echo "Dáta zo súborov pre kávu a čaj boli úspešne vložené do tabuľky.";
+    }
+    
+    private function loadJsonData($fileName)
+    {
+        if (!file_exists($fileName)) {
+            echo "Súbor {$fileName} neexistuje.";
+            return [];
+        }
+    
+        $jsonData = json_decode(file_get_contents($fileName), true);
+    
+        if (!isset($jsonData['rows']) || empty($jsonData['rows'])) {
+            echo "Dáta v súbore {$fileName} sú neplatné alebo prázdne.";
+            return [];
+        }
+    
+        return $jsonData;
+    }
+    
+
+    
 }

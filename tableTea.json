@@ -7,38 +7,38 @@
     ],
     "rows": {
         "Pure White Milk": {
-            "Hot": "$5",
-            "Iced": "$10",
+            "Hot": "5",
+            "Iced": "10",
             "Addon": "-"
         },
         "Hong Kong Tea": {
-            "Hot": "$8",
-            "Iced": "$12",
-            "Addon": "$4"
+            "Hot": "8",
+            "Iced": "12",
+            "Addon": "4"
         },
         "Taiwan Tea": {
-            "Hot": "$4",
-            "Iced": "$10",
-            "Addon": "$4"
+            "Hot": "4",
+            "Iced": "10",
+            "Addon": "4"
         },
         "Bubble Tea": {
-            "Hot": "$8",
-            "Iced": "$12",
+            "Hot": "8",
+            "Iced": "12",
             "Addon": "-"
         },
         "Mixed Fruit Tea": {
-            "Hot": "$10",
-            "Iced": "$15",
+            "Hot": "10",
+            "Iced": "15",
             "Addon": "8"
         },
         "Black Tea": {
-            "Hot": "$15",
+            "Hot": "15",
             "Iced": "-",
-            "Addon": "$3"
+            "Addon": "3"
         },
         "Original Tea": {
-            "Hot": "$12",
-            "Iced": "$14",
+            "Hot": "12",
+            "Iced": "14",
             "Addon": "-"
         }
     }

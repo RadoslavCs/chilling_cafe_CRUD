@@ -1,0 +1,44 @@
+[
+    {
+        "class": "tm-nav-item",
+        "class-a": "tm-nav-link",
+        "href": "#coffee-menu",
+        "style": "color: #fff; text-decoration: none; font-size: 30px;",
+        "content": "Coffee"
+    },
+    {
+        "class": "tm-nav-item",
+        "class-a": "tm-nav-link",
+        "href": "#tea-menu",
+        "style": "color: #fff; text-decoration: none; font-size: 30px;",
+        "content": "Tea"
+    },
+    {
+        "class": "tm-nav-item",
+        "class-a": "tm-nav-link",
+        "href": "#special-items",
+        "style": "color: #fff; text-decoration: none; font-size: 30px;",
+        "content": "Specials"
+    },
+    {
+        "class": "tm-nav-item",
+        "class-a": "tm-nav-link",
+        "href": "#about-us",
+        "style": "color: #fff; text-decoration: none; font-size: 30px;",
+        "content": "About"
+    },
+    {
+        "class": "tm-nav-item",
+        "class-a": "tm-nav-link",
+        "href": "#contact-us",
+        "style": "color: #fff; text-decoration: none; font-size: 30px;",
+        "content": "Contact"
+    },
+    {
+        "class": "tm-nav-item",
+        "class-a": "tm-nav-link",
+        "href": "login.php",
+        "style": "color: #fff; text-decoration: none; font-size: 30px;",
+        "content": "Login"
+    }
+]

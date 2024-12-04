@@ -54,7 +54,7 @@ if (isset($_SESSION['error'])) {
 ?>
 
 <form method="POST" action="login.php">
-<h2>Login</h2>
+    <h2>Login</h2>
     <label for="email">Email:</label><br>
     <input type="email" id="email" name="email" required><br><br>
 

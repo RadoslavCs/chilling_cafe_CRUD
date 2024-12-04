@@ -81,7 +81,18 @@ class Database
              error_log("Chyba pri získavaní údajov pre Tea: " . $e->getMessage());
              return [];
          }
-     }     
+     }    
+     
+     //Pripraví SQL dotaz na vykonanie pomocou PDO a vráti pripravený statement.
+     public function prepareQuery(string $query)
+    {
+        try {
+            return $this->connection->prepare($query);
+        } catch (\PDOException $e) {           
+            throw new \Exception("Nepodarilo sa pripraviť dotaz.");
+        }
+    }
+     
 
      //CRUD     
      // CREATE (INSERT)

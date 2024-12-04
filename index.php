@@ -19,7 +19,7 @@
        
        <?php
        // Coffee and Tea menu
-        include_once("parts/menu.php");
+        include_once("parts/coffee_tea_menu.php");
         // Special Items
         include_once("parts/special_items.php");
         // About our cafe
