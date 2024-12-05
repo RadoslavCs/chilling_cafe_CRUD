@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: 127.0.0.1
--- Čas generovania: Po 02.Dec 2024, 21:54
+-- Čas generovania: Št 05.Dec 2024, 17:07
 -- Verzia serveru: 10.4.32-MariaDB
 -- Verzia PHP: 8.2.12
 
@@ -43,21 +43,48 @@ CREATE TABLE `menu_table` (
 
 INSERT INTO `menu_table` (`id`, `name`, `drink_type`, `hot_price`, `iced_price`, `addon_price`, `blended_price`) VALUES
 (1, 'Americano', 'Coffee', '10', '15', '-', '-'),
-(3, 'Cappuccino', 'Coffee', '15', '18', '-', '20'),
-(5, 'Fresh Latte', 'Coffee', '10', '18', '-', '21'),
-(7, 'Mocha', 'Coffee', '15', '18', '-', '20'),
-(9, 'Espresso', 'Coffee', '10', '15', '-', '-'),
-(10, 'Black Coffee', 'Coffee', '15', '-', '-', '-'),
-(11, 'Double Shot Espresso', 'Coffee', '20', '20', '-', '-'),
-(12, 'Pure White Milk', 'Tea', '5', '10', '-', '-'),
-(13, 'Hong Kong Tea', 'Tea', '8', '12', '4', '-'),
-(14, 'Taiwan Tea', 'Tea', '4', '10', '4', '-'),
-(15, 'Bubble Tea', 'Tea', '8', '12', '-', '-'),
-(16, 'Mixed Fruit Tea', 'Tea', '12.50', '16', '8', '-'),
-(18, 'Original Tea', 'Tea', '12', '14', '3', '-'),
-(20, 'Black Tea', 'Tea', '5,54', '12', '-', '-'),
-(23, 'Test Tea', 'Tea', '12', '12', '4', '-'),
-(24, 'Test Coffe', 'Coffee', '2', '23.40', '-', '20');
+(2, 'Cappuccino', 'Coffee', '15', '18', '-', '20'),
+(3, 'Fresh Latte', 'Coffee', '10', '18', '-', '20'),
+(4, 'Mocha', 'Coffee', '15', '18', '-', '20'),
+(5, 'Espresso', 'Coffee', '10', '15', '-', '-'),
+(6, 'Black Coffee', 'Coffee', '15', '-', '-', '-'),
+(7, 'Double Shot Espresso', 'Coffee', '20', '20', '-', '-'),
+(8, 'Pure White Milk', 'Tea', '5', '10', '-', '-'),
+(9, 'Hong Kong Tea', 'Tea', '8', '12', '4', '-'),
+(10, 'Taiwan Tea', 'Tea', '4', '10', '4', '-'),
+(11, 'Bubble Tea', 'Tea', '8', '12', '-', '-'),
+(12, 'Mixed Fruit Tea', 'Tea', '10', '15', '8', '-'),
+(13, 'Black Tea', 'Tea', '15', '-', '3', '-'),
+(14, 'Original Tea', 'Tea', '12.58', '14.75', '-', '-'),
+(28, 'Test Tea', 'Tea', '5,54', '14', '8', '-'),
+(29, 'Test Coffe', 'Coffee', '15', '23', '-', '20');
+
+-- --------------------------------------------------------
+
+--
+-- Štruktúra tabuľky pre tabuľku `nav_menu`
+--
+
+CREATE TABLE `nav_menu` (
+  `id` int(11) NOT NULL,
+  `class` varchar(50) NOT NULL,
+  `class-a` varchar(50) NOT NULL,
+  `href` varchar(50) NOT NULL,
+  `style` varchar(200) DEFAULT NULL,
+  `content` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Sťahujem dáta pre tabuľku `nav_menu`
+--
+
+INSERT INTO `nav_menu` (`id`, `class`, `class-a`, `href`, `style`, `content`) VALUES
+(1, 'tm-nav-item', 'tm-nav-link', '#coffee-menu', 'color: #fff; text-decoration: none; font-size: 30px;', 'Coffee'),
+(2, 'tm-nav-item', 'tm-nav-link', '#tea-menu', 'color: #fff; text-decoration: none; font-size: 30px;', 'Tea'),
+(3, 'tm-nav-item', 'tm-nav-link', '#special-items', 'color: #fff; text-decoration: none; font-size: 30px;', 'Specials'),
+(4, 'tm-nav-item', 'tm-nav-link', '#about-us', 'color: #fff; text-decoration: none; font-size: 30px;', 'About'),
+(5, 'tm-nav-item', 'tm-nav-link', '#contact-us', 'color: #fff; text-decoration: none; font-size: 30px;', 'Contact'),
+(6, 'tm-nav-item', 'tm-nav-link', 'login.php', 'color: #fff; text-decoration: none; font-size: 30px;', 'Login');
 
 -- --------------------------------------------------------
 
@@ -94,6 +121,12 @@ ALTER TABLE `menu_table`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexy pre tabuľku `nav_menu`
+--
+ALTER TABLE `nav_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexy pre tabuľku `user`
 --
 ALTER TABLE `user`
@@ -107,7 +140,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pre tabuľku `menu_table`
 --
 ALTER TABLE `menu_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primárny kľúč (jedinečný identifikátor).', AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primárny kľúč (jedinečný identifikátor).', AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT pre tabuľku `nav_menu`
+--
+ALTER TABLE `nav_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pre tabuľku `user`

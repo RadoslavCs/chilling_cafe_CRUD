@@ -9,7 +9,7 @@ use classes\Database;
 class Table
 {
      // Vytvorenie inštancie databázy
-    private  $db;
+    protected  $db;
 
     public function __construct()
     {
@@ -284,8 +284,8 @@ class Table
         $teaFile = "tableTea.json";
     
         // Načítanie dát z oboch JSON súborov
-        $coffeeData = $this->loadJsonData($coffeeFile);
-        $teaData = $this->loadJsonData($teaFile);
+        $coffeeData =  json_decode(file_get_contents($coffeeFile), true);
+        $teaData = json_decode(file_get_contents($teaFile), true);
     
         // Pridanie stĺpca 'drink_type' pre kávu a čaj
         foreach ($coffeeData['rows'] as $name => $details) {
@@ -353,25 +353,7 @@ class Table
         }
     
         echo "Dáta zo súborov pre kávu a čaj boli úspešne vložené do tabuľky.";
-    }
-    
-    private function loadJsonData($fileName)
-    {
-        if (!file_exists($fileName)) {
-            echo "Súbor {$fileName} neexistuje.";
-            return [];
-        }
-    
-        $jsonData = json_decode(file_get_contents($fileName), true);
-    
-        if (!isset($jsonData['rows']) || empty($jsonData['rows'])) {
-            echo "Dáta v súbore {$fileName} sú neplatné alebo prázdne.";
-            return [];
-        }
-    
-        return $jsonData;
-    }
-    
-
+    }   
+   
     
 }

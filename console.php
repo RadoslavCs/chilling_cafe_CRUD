@@ -26,3 +26,4 @@ foreach ($files as $type => $filename) {
 
 //Načítanie údajov z json do databázy
 $table->insertDataFromBothJsonFiles();
+$menu->insertNavMenuData();

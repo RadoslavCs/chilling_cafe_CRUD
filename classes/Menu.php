@@ -72,4 +72,85 @@ class Menu extends Table
         }
     }
     
+    //Funkcia načíta údaje z JSON súboru nav_menu.json a vloží ich do tabuľky nav_menu
+    public function insertNavMenuData()
+    {
+        // Názov JSON súboru
+        $fileName = "nav_menu.json";
+
+        // Načítanie dát zo súboru
+        $menuData = json_decode(file_get_contents($fileName), true);
+
+        // Validácia obsahu JSON
+        if (empty($menuData)) {
+            echo "Dáta v súbore {$fileName} sú neplatné alebo prázdne.";
+            return;
+        }
+
+        // Príprava SQL na vloženie dát
+        $sql = "INSERT INTO nav_menu (`id`, `class`, `class-a`, `href`, `style`, `content`) 
+        VALUES (:id, :class, :class_a, :href, :style, :content)
+        ON DUPLICATE KEY UPDATE 
+        `class` = VALUES(`class`), `class-a` = VALUES(`class-a`), 
+        `href` = VALUES(`href`), `style` = VALUES(`style`), `content` = VALUES(`content`)";
+
+        // Použitie metódy prepareQuery
+        $stmt = $this->db->prepareQuery($sql);
+
+        $id = 1; // Počiatočný ID 
+
+        // Iterácia cez dáta a vloženie do databázy
+        foreach ($menuData as $menuItem) {
+            // Validácia jednotlivých atribútov
+            $class = $menuItem['class'] ?? '';
+            $classA = $menuItem['class-a'] ?? '';
+            $href = $menuItem['href'] ?? '';
+            $style = $menuItem['style'] ?? '';
+            $content = $menuItem['content'] ?? '';
+
+            // Vykonanie SQL s nahradenými parametrami
+            $stmt->execute([
+                ':id' => $id++,
+                ':class' => $class,
+                ':class_a' => $classA,
+                ':href' => $href,
+                ':style' => $style,
+                ':content' => $content,
+            ]);
+        }
+
+        echo "Dáta zo súboru {$fileName} boli úspešne vložené do tabuľky nav_menu.";
+    }
+
+    //Metóda načíta dáta z databázy a vráti požadovaný HTML
+    public function getMenuFromDatabase()
+    {
+        // SQL dotaz na načítanie všetkých záznamov z tabuľky nav_menu
+        $sql = "SELECT `href`, `class`, `class-a`, `style`, `content` FROM nav_menu ORDER BY id ASC";
+        
+        // Príprava SQL dotazu
+        $stmt = $this->db->prepareQuery($sql);
+        $stmt->execute();
+        
+        // Načítanie výsledkov
+        $menuData = $stmt->fetchAll();
+
+        // Ak nie sú žiadne dáta, vráti prázdny reťazec
+        if (empty($menuData)) {
+            return '';
+        }
+
+        // Generovanie HTML zo získaných dát
+        $html = '';
+        foreach ($menuData as $menuItem) {
+            $html .= '<li class="' . htmlspecialchars($menuItem['class']) . '">
+                        <a href="' . htmlspecialchars($menuItem['href']) . '" class="' . htmlspecialchars($menuItem['class-a']) . '" 
+                        style="' . htmlspecialchars($menuItem['style']) . '">' . htmlspecialchars($menuItem['content']) . '</a>
+                    </li>';
+        }
+
+        return $html;
+    }
+
+
 }
